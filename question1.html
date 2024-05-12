@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Validation</title>
+    <style>
+    </style>
+</head>
+<body>
+    <form id="priceForm">
+        <label for="priceInput">Enter a valid price:</label>
+        <input type="text" id="priceInput" placeholder="$14.99">
+        <button type="submit">Validate</button>
+    </form>
+
+    <script>
+        document.getElementById('priceForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const priceInput = document.getElementById('priceInput').value;
+            const priceRegex = /^\$\d+\.\d{2}$/;
+
+            if (priceRegex.test(priceInput)) {
+                alert('Valid price format!');
+            } else {
+                alert('Invalid price format. Please enter a valid price (e.g., $14.99).');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mukhtar</title>
+  </head>
+  <body>
+    <h1>My super nifty to-do list</h1>
+    <ul id="list"></ul>
+    <div>
+      <input type="text" id="item" />
+      <button id="add">add</button>
+      <button id="remove">remove</button>
+    </div>
+
+    <script>
+      const itemInput = document.getElementById("item");
+      const addButton = document.getElementById("add");
+      const removeButton = document.getElementById("remove");
+      const list = document.getElementById("list");
+
+      let colorIndex = 0;
+
+      function addItem() {
+        const itemText = itemInput.value.trim();
+
+        if (itemText !== "") {
+          const li = document.createElement("li");
+          li.textContent = itemText;
+          li.style.backgroundColor = getColor();
+          list.appendChild(li);
+          colorIndex++;
+        }
+
+        itemInput.value = "";
+      }
+
+      function removeItem() {
+        const itemText = itemInput.value.trim().toLowerCase();
+        const items = list.getElementsByTagName("li");
+
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          if (item.textContent.toLowerCase() === itemText) {
+            item.remove();
+            colorIndex = i % 2;
+            break;
+          }
+        }
+
+        itemInput.value = "";
+        updateColors();
+      }
+
+      function getColor() {
+        return colorIndex % 2 === 0 ? "white" : "yellow";
+      }
+
+      function updateColors() {
+        const items = list.getElementsByTagName("li");
+
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          item.style.backgroundColor = getColor();
+          colorIndex++;
+        }
+      }
+
+      // Add event listeners to the buttons
+      addButton.addEventListener("click", addItem);
+      removeButton.addEventListener("click", removeItem);
+    </script>
+  </body>
+</html>
